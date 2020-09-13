@@ -80,7 +80,7 @@ class RecommenderPlugin {
      * @param collection
      */
     train(collection) {
-        this.recommender.train(collection.data().map(this.convertNodeToDocument));
+        this.recommender.train(collection.data().map(this.convertNodeToDocument.bind(this)));
     }
 
     /**
@@ -117,13 +117,14 @@ class RecommenderPlugin {
      * @param documentRelations
      */
     createNodeRelations(collection, store, id, documentRelations) {
+        console.log("id ", id, " has relations ", documentRelations);
         collection.data().forEach((node) => {
             const related = node.related || [];
             documentRelations.forEach(id => {
                 related.push(store.createReference(this.options.typeName, id));
                 collection.updateNode({...node, related: related})
             });
-            if (ids.length === 0) collection.updateNode({...node, related: []})
+            if (documentRelations.length === 0) collection.updateNode({...node, related: []})
         });
     }
 
