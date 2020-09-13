@@ -1,13 +1,16 @@
 {
   "name": "gridsome-plugin-recommender",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Improve churn rate of your Gridsome site by generating post or product recommendations to show users related content they might be interested in.",
   "main": "gridsome.server.js",
   "author": "Marian Klühspies",
   "contributors": [
     "mklueh"
   ],
-  "homepage": "https://github.com/mklueh/gridsome-plugin-recommender",
+  "repository": {
+    "url": "https://github.com/mklueh/gridsome-plugin-recommender"
+  },
+  "homepage": "https://www.overflowed.dev",
   "bugs": {
     "url": "https://github.com/mklueh/gridsome-plugin-recommender"
   },
