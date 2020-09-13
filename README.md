@@ -2,13 +2,13 @@
 
 [![npm](https://img.shields.io/npm/v/gridsome-plugin-recommender.svg)](https://www.npmjs.com/package/gridsome-plugin-recommender)
 
-A recommender plugin for [Gridsome](https://gridsome.org/) 
-analyses your posts and creates relations between similar posts based on text analysis.
+Improve churn rate of your [Gridsome](https://gridsome.org/) site by generating post or product recommendations to show users
+additional content they might be interested in.
 
-## Use cases
-
-Improve churn rate by generating post or product recommendations to show users
-additional content they might be interested in as well. 
+ 
+## 
+Analyses your posts and creates relations between similar posts based on text analysis. For more information on the text analysis part visit [content-based-recommender](https://github.com/stanleyfok/content-based-recommender)
+ 
 
 
 ## Install
@@ -23,6 +23,13 @@ Example: Find similar blog posts based on the title.
 ```js
 module.exports = {
   plugins: [
+    {
+      use: '@gridsome/source-filesystem',
+      options: {
+        path: 'content/posts/**/*.md',
+        typeName: 'Post',
+      },
+    },
     {
       use: "gridsome-plugin-recommender",
       options: {
@@ -42,6 +49,29 @@ module.exports = {
 
 **Important notice: the plugin needs to be placed below your source plugins or otherwise no required collections are created before. 
 [Issue-1342](https://github.com/gridsome/gridsome/issues/1342)**
+
+
+In your **templates** use something like this
+
+```
+<page-query>
+    query RelatedPosts {
+      allPost(filter:{id:{eq:"current-post-id"}}) {
+        edges {
+          node {
+            id
+            related{
+              id
+              path
+            }
+          }
+        }
+      }
+    }
+</page-query>
+```
+
+
 
 
 ## Options
