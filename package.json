@@ -1,5 +1,5 @@
 {
-  "name": "gridsome-plugin-recommender",
+  "name": "@mklueh/gridsome-plugin-recommender",
   "version": "1.0.0",
   "description": "Improve churn rate of your Gridsome site by generating post or product recommendations to show users additional content they might be interested in.",
   "main": "gridsome.server.js",
