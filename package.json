@@ -1,7 +1,7 @@
 {
   "name": "gridsome-plugin-recommender",
   "version": "1.0.0",
-  "description": "Gridsome Plugin to add relations for recommended posts using text analysis",
+  "description": "Improve churn rate of your Gridsome site by generating post or product recommendations to show users additional content they might be interested in.",
   "main": "gridsome.server.js",
   "author": "Marian Klühspies",
   "contributors": [
@@ -12,7 +12,7 @@
     "url": "https://github.com/mklueh/gridsome-plugin-recommender"
   },
   "license": "MIT",
-  "private": true,
+  "private": false,
   "keywords": [
     "gridsome",
     "gridsome-plugin",
