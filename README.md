@@ -2,7 +2,14 @@
 
 [![npm](https://img.shields.io/npm/v/gridsome-plugin-recommender.svg)](https://www.npmjs.com/package/gridsome-plugin-recommender)
 
-A recommender plugin for [Gridsome](https://gridsome.org/) to create relations to similar nodes using machine learning.
+A recommender plugin for [Gridsome](https://gridsome.org/) 
+analyses your posts and creates relations between similar posts based on text analysis.
+
+## Use cases
+
+Generating post or product recommendations for your static sites based on text analysis to show users
+additional content they might be interested in. 
+
 
 ## Install
 
@@ -103,7 +110,3 @@ This plugin will install and configure [content-based-recommender](https://githu
 Please refer to it in case of any problems related to the accuracy or performance issues that might occur when using
 large collections. 
 
-## Use cases
-
-Generating post or product recommendations for your static site pages based on text analysis to show users
-additional content they might be interested in. 
