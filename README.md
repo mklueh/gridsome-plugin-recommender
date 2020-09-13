@@ -1,4 +1,4 @@
-#  Gridsome i18n plugin
+#  Gridsome Recommender Plugin
 
 [![npm](https://img.shields.io/npm/v/gridsome-plugin-recommender.svg)](https://www.npmjs.com/package/gridsome-plugin-recommender)
 
@@ -34,6 +34,19 @@ module.exports = {
 ```
 
 ## Options
+
+#### enabled
+
+- Type: `boolean`
+
+Enables / Disables the entire plugin. This might break your UI logic as the relations will be missing from
+your nodes.
+
+#### debug
+
+- Type: `boolean`
+
+Enables log messages
 
 #### typeName
 
