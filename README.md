@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/gridsome-plugin-recommender.svg)](https://www.npmjs.com/package/gridsome-plugin-recommender)
 
 Improve churn rate of your [Gridsome](https://gridsome.org/) site by generating post or product recommendations to show users
-additional content they might be interested in.
+related content they might be interested in.
 
  
 ## 
