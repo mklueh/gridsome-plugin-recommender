@@ -16,8 +16,12 @@
   "keywords": [
     "gridsome",
     "gridsome-plugin",
-    "ssg",
-    "gridsome blog cover"
+    "recommender",
+    "recommendations",
+    "similar posts",
+    "similar products",
+    "post recommendations",
+    "product recommendations"
   ],
   "peerDependencies": {
     "gridsome": "^0.7.0"
