@@ -26,7 +26,7 @@ module.exports = {
 
 ## Options
 
-#### collection
+#### typeName
 
 - Type: `string` _required_
 
@@ -34,9 +34,9 @@ The collection we want to build relations to.
 
 #### field
 
-- Type: `string`
+- Type: `[string]`
 
-The collection field we want to analyze
+The collection fields we want to analyze
 
 #### minScore
 

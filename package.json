@@ -6,7 +6,17 @@
   "author": "Marian Klühspies",
   "license": "MIT",
   "private": true,
+  "keywords": [
+    "gridsome",
+    "gridsome-plugin",
+    "ssg",
+    "gridsome blog cover"
+  ],
+  "peerDependencies": {
+    "gridsome": "^0.7.0"
+  },
   "dependencies": {
+    "chalk": "^4.1.0",
     "content-based-recommender": "^1.4.0",
     "lodash": "^4.17.20"
   }
