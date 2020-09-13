@@ -7,8 +7,8 @@ analyses your posts and creates relations between similar posts based on text an
 
 ## Use cases
 
-Generating post or product recommendations for your static sites based on text analysis to show users
-additional content they might be interested in. 
+Improve churn rate by generating post or product recommendations to show users
+additional content they might be interested in as well. 
 
 
 ## Install
@@ -39,6 +39,10 @@ module.exports = {
   ]
 };
 ```
+
+**Important notice: the plugin needs to be placed below your source plugins or otherwise no required collections are created before. 
+[Issue-1342](https://github.com/gridsome/gridsome/issues/1342)**
+
 
 ## Options
 
