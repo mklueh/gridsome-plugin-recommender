@@ -10,9 +10,10 @@ class RecommenderPlugin {
             typeName: undefined,
             field: undefined,
             relatedFieldName: 'related',
-            minScore: 0.1,
+            minScore: 0.01,
             maxScore: 1,
             maxRelations: 10,
+            debug: false
         }
     }
 
@@ -21,10 +22,7 @@ class RecommenderPlugin {
         this.validateOptions(options);
         this.options = Object.assign(RecommenderPlugin.defaultOptions(), options);
 
-        if (!this.options.enabled) {
-
-            return;
-        }
+        if (!this.options.enabled) return;
 
         this.recommender = new ContentBasedRecommender({
             minScore: this.options.minScore,
@@ -45,7 +43,6 @@ class RecommenderPlugin {
         if (!options.typeName) throw `${pluginName}: You need to define options.collection in your options you want to create recommendations for`;
         if (!options.field) throw `${pluginName}: You need to define options..field in your options you want to create recommendations for`;
 
-
         //if options.minScore === undefined -> false, if in range -> false
         // minScore === undefined
         if (!options.minScore && !_.inRange(options.minScore, 0, 1)) throw `${pluginName}: options.minScore need to be in range between [0,1]`;
@@ -54,13 +51,13 @@ class RecommenderPlugin {
 
     }
 
-
     /**
      * Load all nodes from given collection
      *
      * @param actions
      */
     loadSource(actions) {
+        const context = this;
         const collection = actions.getCollection(this.options.typeName);
 
         if (!collection) throw `${pluginName}: options.typeName '${this.options.typeName}' cannot be found - make sure the collection exists`;
@@ -68,11 +65,10 @@ class RecommenderPlugin {
         this.train(collection);
 
         collection.data().forEach((node) => {
-            const relations = this.fetchDocumentRelations(node.id);
-            this.createNodeRelations(collection, actions.store, node.id, relations);
+            const relations = this.fetchDocumentRelations.call(context, node.id);
+            this.createNodeRelations(collection, actions.store, node, relations);
         })
     }
-
 
     /**
      * Trains model based on given collection
@@ -80,7 +76,9 @@ class RecommenderPlugin {
      * @param collection
      */
     train(collection) {
-        this.recommender.train(collection.data().map(this.convertNodeToDocument.bind(this)));
+        let convertedDocuments = collection.data().map(this.convertNodeToDocument.bind(this));
+        this.log("training", convertedDocuments);
+        this.recommender.train(convertedDocuments);
     }
 
     /**
@@ -113,19 +111,18 @@ class RecommenderPlugin {
      *
      * @param collection
      * @param store
-     * @param id
+     * @param node
      * @param documentRelations
      */
-    createNodeRelations(collection, store, id, documentRelations) {
-        console.log("id ", id, " has relations ", documentRelations);
-        collection.data().forEach((node) => {
-            const related = node.related || [];
-            documentRelations.forEach(id => {
-                related.push(store.createReference(this.options.typeName, id));
-                collection.updateNode({...node, related: related})
-            });
-            if (documentRelations.length === 0) collection.updateNode({...node, related: []})
-        });
+    createNodeRelations(collection, store, node, documentRelations) {
+        this.log("createNodeRelations - ", "id ", node.id, " has relations ", documentRelations);
+        let options = {...node};
+        options[this.options.relatedFieldName] = documentRelations.map(relation => store.createReference(this.options.typeName, relation.id));
+        collection.updateNode(options)
+    }
+
+    log() {
+        if (this.options.debug) console.log(`${pluginName}: `, arguments);
     }
 
 }

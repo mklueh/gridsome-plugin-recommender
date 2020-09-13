@@ -11,13 +11,22 @@ A recommender plugin for [Gridsome](https://gridsome.org/) to create relations t
 
 ## Getting Started
 
+Example: Find similar blog posts based on the title.
+
 ```js
 module.exports = {
   plugins: [
     {
       use: "gridsome-plugin-recommender",
       options: {
-        
+        enabled: true,
+        typeName: 'Post',
+        field: 'title',
+        relatedFieldName: 'related',
+        minScore: 0.01,
+        maxScore: 1,
+        maxRelations: 10,
+        debug: false
       }
     }
   ]
@@ -28,22 +37,38 @@ module.exports = {
 
 #### typeName
 
+- Type: `boolean`
+
+The collection we want to use to create relations of similar nodes.
+
+#### typeName
+
 - Type: `string` _required_
 
-The collection we want to build relations to.
+The collection we want to use to create relations of similar nodes.
 
 #### field
 
-- Type: `[string]`
+- Type: `[string]` _required_
 
-The collection fields we want to analyze
+The collection fields we want to analyze for similarities
+
+
+#### relatedFieldName
+
+- Type: `[string]`
+- Default: related
+
+The field attached to your GraphQl node containing the related objects.
+Allows creating multiple relations per collection
 
 #### minScore
 
 - Type: `number` [0,1]
-- Default: 0.1
+- Default: 0.01
 
-Minimum score required to identify a relation between two nodes
+Minimum score required to identify a relation between two nodes.
+
 
 #### maxScore
 
@@ -59,12 +84,13 @@ Maximum score allowed to identify a relation between two nodes
 
 Default locale to use in page's path without locale segment in it.
 
-
 ## Usage
 
-This plugin will install and configure [content-based-recommender](https://kazupon.github.io/vue-i18n/introduction.html), so refer to it about usage.
+This plugin will install and configure [content-based-recommender](https://github.com/stanleyfok/content-based-recommender).
+Please refer to it in case of any problems related to the accuracy or performance issues that might occur when using
+large collections. 
 
 ## Use cases
 
-- Related Posts / Products / Articles
-  Identify similar posts and show recommendations on the post page linking to other posts
+Generating post or product recommendations for your static site pages based on text analysis to show users
+additional content they might be interested in. 
