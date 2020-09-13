@@ -1,7 +1,7 @@
 {
   "name": "gridsome-plugin-recommender",
   "version": "1.0.0",
-  "description": "Gridsome Plugin to add relations for recommended posts using machine learning",
+  "description": "Gridsome Plugin to add relations for recommended posts using text analysis",
   "main": "gridsome.server.js",
   "author": "Marian Klühspies",
   "contributors": [
