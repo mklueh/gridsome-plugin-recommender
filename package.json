@@ -1,0 +1,13 @@
+{
+  "name": "gridsome-plugin-recommender",
+  "version": "1.0.0",
+  "description": "Gridsome Plugin to add relations for recommended posts using machine learning",
+  "main": "gridsome.server.js",
+  "author": "Marian Klühspies",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "content-based-recommender": "^1.4.0",
+    "lodash": "^4.17.20"
+  }
+}
