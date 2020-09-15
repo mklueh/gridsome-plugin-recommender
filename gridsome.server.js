@@ -45,7 +45,7 @@ class RecommenderPlugin {
              * {fillWIthUnrelated} will always fill relations per node
              * to {minRelations} with random nodes
              */
-            fillWithUnrelated: false,
+            fillWithRandom: false,
             debug: false
         }
     }
@@ -96,7 +96,7 @@ class RecommenderPlugin {
 
         collection.data().forEach((node) => {
             let relations = this.fetchDocumentRelations.call(context, node.id);
-            if (this.options.fillWithUnrelated && relations.length < this.options.minRelations) {
+            if (this.options.fillWithRandom && relations.length < this.options.minRelations) {
                 this.log(`minRelations ${relations.length}/${this.options.minRelations} not reached - filling with random relations`)
                 relations = this.fillWithRandomRelations(collection, relations);
             }
@@ -111,7 +111,7 @@ class RecommenderPlugin {
      */
     train(collection) {
         let convertedDocuments = collection.data().map(this.convertNodeToDocument.bind(this));
-        this.log("training", convertedDocuments);
+        this.log("training " + convertedDocuments.length);
         this.recommender.train(convertedDocuments);
     }
 
@@ -150,19 +150,39 @@ class RecommenderPlugin {
      */
     fillWithRandomRelations(collection, documentRelations) {
         const numElementsMissing = this.options.minRelations - documentRelations.length;
-        const fillers = this.getArraySubsetExcluding(collection, documentRelations, numElementsMissing);
-        return documentRelations.map(i => i.id).concat(fillers)
+        this.log(`Missing ${numElementsMissing} relations to minRelations of ${this.options.minRelations}`)
+
+        const fillers = this.getArraySubsetExcluding(collection, documentRelations, numElementsMissing)
+            .map(f => this.convertNodeToDocument(f));
+
+        this.log(`Having ${documentRelations.length} document relations and ${fillers.length} fillers`)
+        return documentRelations.concat(fillers)
     }
 
+    /**
+     * Returns a subset of the collection excluding given list of nodes
+     *
+     * @param collection
+     * @param toExclude
+     * @param count
+     * @returns {any[]}
+     */
     getArraySubsetExcluding(collection, toExclude, count) {
-        const array = collection.data();
-        const indices = [];
-        const result = new Array(count);
-        for (let i = 0; i < count; i++) {
-            let j = Math.floor(Math.random() * (array.length - i) + i);
-            result[i] = array[indices[j] === undefined ? j : indices[j]];
-            indices[j] = indices[i] === undefined ? i : indices[i];
-        }
+        const nodes = collection.data();
+        const numberFillers = Math.min(nodes.length - toExclude.length, count);
+        const hash = new Set();
+        toExclude.forEach(e => hash.add(e.id));
+        const result = [];
+        let i = 0;
+
+        do {
+            let item = nodes[Math.floor(Math.random() * (nodes.length))];
+            if (hash.has(item.id)) continue;
+            result.push(this.convertNodeToDocument(item));
+            hash.add(item.id);
+            i++;
+        } while (i < numberFillers)
+
         return result;
     }
 
@@ -175,14 +195,13 @@ class RecommenderPlugin {
      * @param documentRelations
      */
     createNodeRelations(collection, store, node, documentRelations) {
-        this.log("createNodeRelations - ", "id ", node.id, " has relations ", documentRelations);
         let options = {...node};
         options[this.options.relatedFieldName] = documentRelations.map(relation => store.createReference(this.options.typeName, relation.id));
         collection.updateNode(options)
     }
 
-    log() {
-        if (this.options.debug) console.log(`${pluginName}: `, arguments);
+    log(a) {
+        if (this.options.debug) console.log(`${pluginName}: `, a);
     }
 
 }

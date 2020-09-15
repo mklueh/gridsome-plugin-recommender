@@ -39,7 +39,9 @@ module.exports = {
         relatedFieldName: 'related',
         minScore: 0.01,
         maxScore: 1,
+        minRelations:3,
         maxRelations: 10,
+        fillWithRandom:false,
         debug: false
       }
     }
@@ -131,12 +133,28 @@ Minimum score required to identify a relation between two nodes.
 
 Maximum score allowed to identify a relation between two nodes
 
+#### minRelations
+
+- Type: `number`
+- Default: 3
+
+Minimum relations to be produced. If the number of similar nodes is smaller than minRelations,
+it will be filled with random items when fillWithRandom is enabled
+
 #### maxRelations
 
 - Type: `number`
-- Default: 100
+- Default: 10
 
-Default locale to use in page's path without locale segment in it.
+Maximum relations to be produced
+
+
+#### fillWithRandom
+
+- Type: `boolean`
+- Default: false
+
+Enables filling relations up to number of minRelations with random nodes
 
 ## Usage
 

@@ -9,7 +9,7 @@
       Related Posts:
       <ul>
         <li v-for="related in $page.blogPost.related" :key="related.id">
-          <g-link :to="$page.blogPost.path">{{
+          <g-link :to="related.path">{{
               related.title
             }}
           </g-link>
