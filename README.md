@@ -10,7 +10,7 @@ related content they might be interested in.
 Analyses your posts and creates relations between similar posts based on text analysis. For more information on the text analysis part visit [content-based-recommender](https://github.com/stanleyfok/content-based-recommender)
  
  
-### [DEMO](https://mklueh.github.io/gridsome-plugin-recommender/)
+### Examples [on my site](https://www.overflowed.dev) and in the [demo](https://mklueh.github.io/gridsome-plugin-recommender/)
 
 
 

@@ -31,8 +31,7 @@ module.exports = {
                 typeName: 'BlogPost',
                 field: 'title',
                 minScore: 0.1,
-                minRelations: 5,
-                fillWithRandom: true
+                maxRelations: 3,
             }
         },
     ],
