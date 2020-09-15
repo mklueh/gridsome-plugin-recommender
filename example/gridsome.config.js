@@ -5,7 +5,9 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = {
-    siteName: 'Gridsome',
+    siteName: 'Gridsome Plugin Recommender Demo',
+    siteUrl: 'https://mklueh.github.io',
+    pathPrefix: '/gridsome-plugin-recommender',
     transformers: {
         remark: {
             externalLinksTarget: '_blank',
