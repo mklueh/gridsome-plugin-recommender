@@ -39,16 +39,12 @@ class RecommenderPlugin {
      */
     validateOptions(options) {
         if (options === undefined) throw `Options not defined for ${pluginName}`
-
         if (!options.typeName) throw `${pluginName}: You need to define options.collection in your options you want to create recommendations for`;
         if (!options.field) throw `${pluginName}: You need to define options..field in your options you want to create recommendations for`;
-
-        //if options.minScore === undefined -> false, if in range -> false
-        // minScore === undefined
         if (!options.minScore && !_.inRange(options.minScore, 0, 1)) throw `${pluginName}: options.minScore need to be in range between [0,1]`;
         if (!options.maxScore && !_.inRange(options.maxScore, 0, 1)) throw `${pluginName}: options.maxScore need to be in range between [0,1]`;
-        if (!options.maxRelations && !_.inRange(options.maxScore, 0, 100)) throw `${pluginName}: options.maxRelations need to be in range between [0,100]`;
-
+        if (!options.maxRelations && !_.inRange(options.maxRelations, 0, 100)) throw `${pluginName}: options.maxRelations need to be in range between [0,100]`;
+        if (!options.minRelations && !_.inRange(options.minRelations, 0, 100)) throw `${pluginName}: options.minRelations need to be in range between [0,100]`;
     }
 
     /**

@@ -91,12 +91,6 @@ Enables log messages
 
 #### typeName
 
-- Type: `boolean`
-
-The collection we want to use to create relations of similar nodes.
-
-#### typeName
-
 - Type: `string` _required_
 
 The collection we want to use to create relations of similar nodes.
@@ -122,6 +116,8 @@ Allows creating multiple relations per collection
 - Default: 0.01
 
 Minimum score required to identify a relation between two nodes.
+
+**This might need to be adjusted depending on your content length**
 
 
 #### maxScore
