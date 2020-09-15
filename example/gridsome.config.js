@@ -25,9 +25,12 @@ module.exports = {
             use: 'gridsome-plugin-recommender',
             options: {
                 enabled: true,
+                debug: true,
                 typeName: 'BlogPost',
                 field: 'title',
-                minScore: 0.1
+                minScore: 0.1,
+                minRelations: 5,
+                fillWithRandom: true
             }
         },
     ],

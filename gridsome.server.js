@@ -7,12 +7,45 @@ class RecommenderPlugin {
     static defaultOptions() {
         return {
             enabled: true,
+            /**
+             * {typeName} is the name of the collection
+             * we relate to
+             * required
+             */
             typeName: undefined,
+            /**
+             * {field} is the collection field we
+             * train our model with
+             * required
+             */
             field: undefined,
+            /**
+             * relation field name that gets added to the collection
+             * containing all related elements
+             */
             relatedFieldName: 'related',
+            /**
+             * {minScore} is the minimum similarity score
+             * required for being considered "similar"
+             */
             minScore: 0.01,
             maxScore: 1,
+            /**
+             * {maxRelations} is the number of relations to be produced
+             * per node as a maximum
+             */
             maxRelations: 10,
+            /**
+             * {minRelations} is the number of relations to be produced
+             * per node as a minimum. As a consequence nodes are factored in
+             * that might not be related as fillers to reach this number
+             */
+            minRelations: 3,
+            /**
+             * {fillWIthUnrelated} will always fill relations per node
+             * to {minRelations} with random nodes
+             */
+            fillWithRandom: false,
             debug: false
         }
     }
@@ -60,8 +93,13 @@ class RecommenderPlugin {
 
         this.train(collection);
 
+
         collection.data().forEach((node) => {
-            const relations = this.fetchDocumentRelations.call(context, node.id);
+            let relations = this.fetchDocumentRelations.call(context, node.id);
+            if (this.options.fillWithRandom && relations.length < this.options.minRelations) {
+                this.log(`minRelations ${relations.length}/${this.options.minRelations} not reached - filling with random relations`)
+                relations = this.fillWithRandomRelations(collection, relations);
+            }
             this.createNodeRelations(collection, actions.store, node, relations);
         })
     }
@@ -73,7 +111,7 @@ class RecommenderPlugin {
      */
     train(collection) {
         let convertedDocuments = collection.data().map(this.convertNodeToDocument.bind(this));
-        this.log("training", convertedDocuments);
+        this.log("training " + convertedDocuments.length);
         this.recommender.train(convertedDocuments);
     }
 
@@ -103,6 +141,52 @@ class RecommenderPlugin {
     }
 
     /**
+     * Better we have a list here to create fast subsets
+     * Operate on collection or on documents or only on ids?
+     * TODO
+     *
+     * @param collection
+     * @param documentRelations
+     */
+    fillWithRandomRelations(collection, documentRelations) {
+        const numElementsMissing = this.options.minRelations - documentRelations.length;
+        this.log(`Missing ${numElementsMissing} relations to minRelations of ${this.options.minRelations}`)
+
+        const fillers = this.getArraySubsetExcluding(collection, documentRelations, numElementsMissing)
+            .map(f => this.convertNodeToDocument(f));
+
+        this.log(`Having ${documentRelations.length} document relations and ${fillers.length} fillers`)
+        return documentRelations.concat(fillers)
+    }
+
+    /**
+     * Returns a subset of the collection excluding given list of nodes
+     *
+     * @param collection
+     * @param toExclude
+     * @param count
+     * @returns {any[]}
+     */
+    getArraySubsetExcluding(collection, toExclude, count) {
+        const nodes = collection.data();
+        const numberFillers = Math.min(nodes.length - toExclude.length, count);
+        const hash = new Set();
+        toExclude.forEach(e => hash.add(e.id));
+        const result = [];
+        let i = 0;
+
+        do {
+            let item = nodes[Math.floor(Math.random() * (nodes.length))];
+            if (hash.has(item.id)) continue;
+            result.push(this.convertNodeToDocument(item));
+            hash.add(item.id);
+            i++;
+        } while (i < numberFillers)
+
+        return result;
+    }
+
+    /**
      * Create node relations for one node in collection / GraphQl
      *
      * @param collection
@@ -111,14 +195,13 @@ class RecommenderPlugin {
      * @param documentRelations
      */
     createNodeRelations(collection, store, node, documentRelations) {
-        this.log("createNodeRelations - ", "id ", node.id, " has relations ", documentRelations);
         let options = {...node};
         options[this.options.relatedFieldName] = documentRelations.map(relation => store.createReference(this.options.typeName, relation.id));
         collection.updateNode(options)
     }
 
-    log() {
-        if (this.options.debug) console.log(`${pluginName}: `, arguments);
+    log(a) {
+        if (this.options.debug) console.log(`${pluginName}: `, a);
     }
 
 }
