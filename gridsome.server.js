@@ -95,10 +95,12 @@ class RecommenderPlugin {
 
 
         collection.data().forEach((node) => {
+            console.log(node.id);
             let relations = this.fetchDocumentRelations.call(context, node.id);
             if (this.options.fillWithRandom && relations.length < this.options.minRelations) {
-                this.log(`minRelations ${relations.length}/${this.options.minRelations} not reached - filling with random relations`)
-                relations = this.fillWithRandomRelations(collection, relations);
+                this.log(`minRelations ${this.options.minRelations} not reached - filling with ${relations.length} random relations`)
+                relations = this.fillWithRandomRelations(collection, relations, node.id);
+                console.log(node.id, " has ", relations)
             }
             this.createNodeRelations(collection, actions.store, node, relations);
         })
@@ -143,19 +145,17 @@ class RecommenderPlugin {
     /**
      * Better we have a list here to create fast subsets
      * Operate on collection or on documents or only on ids?
-     * TODO
      *
      * @param collection
      * @param documentRelations
      */
-    fillWithRandomRelations(collection, documentRelations) {
+    fillWithRandomRelations(collection, documentRelations, excludedPostId) {
         const numElementsMissing = this.options.minRelations - documentRelations.length;
         this.log(`Missing ${numElementsMissing} relations to minRelations of ${this.options.minRelations}`)
 
-        const fillers = this.getArraySubsetExcluding(collection, documentRelations, numElementsMissing)
+        const fillers = this.getArraySubsetExcluding(collection, documentRelations, numElementsMissing, excludedPostId)
             .map(f => this.convertNodeToDocument(f));
 
-        this.log(`Having ${documentRelations.length} document relations and ${fillers.length} fillers`)
         return documentRelations.concat(fillers)
     }
 
@@ -167,10 +167,11 @@ class RecommenderPlugin {
      * @param count
      * @returns {any[]}
      */
-    getArraySubsetExcluding(collection, toExclude, count) {
+    getArraySubsetExcluding(collection, toExclude, count, excludedPostId) {
         const nodes = collection.data();
         const numberFillers = Math.min(nodes.length - toExclude.length, count);
         const hash = new Set();
+        hash.add(excludedPostId);
         toExclude.forEach(e => hash.add(e.id));
         const result = [];
         let i = 0;
