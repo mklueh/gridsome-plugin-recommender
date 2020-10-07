@@ -1,17 +1,20 @@
 # Changelog
 
+### v1.1.0 (07.09.2020)
+
+* Support for multiple collections using **options.referenceTypeName**
 
 ### v1.0.5 (16.09.2020)
 
-1. Excluded current post from related list
+* Excluded current post from related list
 
 
 #### v1.0.3 (15.09.2020)
 
-1. Example project added
-2. fillWithRandom function to deliver consistent number of relations per node
+* Example project added
+* fillWithRandom function to deliver consistent number of relations per node
 
 
 #### v1.0.0 (14.09.2020)
 
-1. Initial release
+* Initial release

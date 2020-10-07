@@ -4,6 +4,9 @@
   "description": "Improve user´s average time on page of your Gridsome site by generating post or product recommendations to show users related content they might be interested in.",
   "main": "gridsome.server.js",
   "author": "Marian Klühspies",
+  "scripts": {
+    "test": "ava"
+  },
   "contributors": [
     "mklueh"
   ],
@@ -31,7 +34,10 @@
   },
   "dependencies": {
     "chalk": "^4.1.0",
-    "content-based-recommender": "^1.4.0",
+    "content-based-recommender": "^1.5.0",
     "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "ava": "^3.13.0"
   }
 }
