@@ -9,9 +9,19 @@ related content they might be interested in.
 ## 
 Analyses your posts and creates relations between similar posts based on text analysis. For more information on the text analysis part visit [content-based-recommender](https://github.com/stanleyfok/content-based-recommender)
  
+## Common Use Cases
+
+1. Finding related posts
+1. Save time by automatically tagging / categorizing your posts
+1. Showing context-based ads / affiliate links on your post pages that relate to the content
+1. Automatically generating tag / category indexes for your posts or products 
  
 ### Examples [on my site](https://www.overflowed.dev) and in the [demo](https://mklueh.github.io/gridsome-plugin-recommender/)
 
+## Restrictions
+
+**This plugin does not operate on the GraphQL Layer. Any content source that plugs in via GraphQL should not work with it.
+Sources like gridsome-source-filesystem or @gridsome/vue-remark are working**
 
 
 ## Install
