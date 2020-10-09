@@ -18,6 +18,8 @@ Analyses your posts and creates relations between similar posts based on text an
  
 ### Examples [on my site](https://www.overflowed.dev) and in the [demo](https://mklueh.github.io/gridsome-plugin-recommender/)
 
+![Showcase(/images/gridsome_recommender_showcase.png)
+
 ## Restrictions
 
 **This plugin does not operate on the GraphQL Layer. Any content source that plugs in via GraphQL should not work with it.
