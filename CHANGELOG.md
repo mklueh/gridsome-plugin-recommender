@@ -1,8 +1,9 @@
 # Changelog
 
-### v1.1.0 (07.09.2020)
+### v1.1.0 (09.10.2020)
 
 * Support for multiple collections using **options.referenceTypeName**
+* New showcase site
 
 ### v1.0.5 (16.09.2020)
 

@@ -9,11 +9,7 @@
 
     <div id="tags" class="py-6">
       <b>Automatically matched tags by gridsome-plugin-recommender:</b>
-      <div class="grid grid-cols-3 p-4">
-      <g-link :to="tag.path" class="tag" v-for="tag in $page.blogPost.tags" :key="tag.id">
-        {{            tag.title          }}
-      </g-link>
-      </div>
+      <tag-widget :tags="$page.blogPost.tags"/>
     </div>
 
     <div id="related-posts" class="py-6" v-if="$page.blogPost.related.length > 0">
@@ -27,9 +23,10 @@
 
 <script>
 import PostsWidget from "../components/PostsWidget";
+import TagWidget from "../components/TagWidget";
 export default {
   name: "BlogPost",
-  components: {PostsWidget}
+  components: {TagWidget, PostsWidget}
 }
 </script>
 
@@ -57,12 +54,5 @@ title
 
 <style scoped>
 
-.tag {
-  background-color: cornflowerblue;
-  border-radius: 15px;
-  padding: 6px 12px;
-  margin: 4px;
-  color: azure !important;
 
-}
 </style>
