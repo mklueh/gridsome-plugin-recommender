@@ -73,6 +73,7 @@ class RecommenderPlugin {
              * to {minRelations} with random nodes
              */
             fillWithRandom: false,
+            caseSensitive: false,
             debug: false
         }
     }
@@ -148,7 +149,9 @@ class RecommenderPlugin {
      * @param collection
      */
     train(collection) {
-        let convertedDocuments = collection.data().map(node => this.convertNodeToDocument(node, this.options.field));
+        let convertedDocuments = collection.data().map(node => {
+            return this.convertDocument(node, this.options.field);
+        });
         this.log("training " + convertedDocuments.length);
         this.recommender.train(convertedDocuments);
     }
@@ -159,10 +162,20 @@ class RecommenderPlugin {
      * @param referenceCollection
      */
     trainBidirectional(collection, referenceCollection) {
-        let convertedDocuments = collection.data().map(node => this.convertNodeToDocument(node, this.options.field));
-        let convertedReferenceDocuments = referenceCollection.data().map(node => this.convertNodeToDocument(node, this.options.referenceField));
+        let convertedDocuments = collection.data().map(node => {
+            return this.convertDocument(node, this.options.field);
+        });
+        let convertedReferenceDocuments = referenceCollection.data().map(node => {
+            return this.convertDocument(node, this.options.referenceField);
+        });
         this.log("training " + convertedDocuments.length);
         this.recommender.trainBidirectional(convertedDocuments, convertedReferenceDocuments);
+    }
+
+    convertDocument(node, field) {
+        const doc = this.convertNodeToDocument(node, field)
+        if (this.options.caseSensitive) doc.content = doc.content.toLowerCase();
+        return doc;
     }
 
     /**
