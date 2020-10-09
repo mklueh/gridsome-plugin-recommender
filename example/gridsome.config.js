@@ -45,7 +45,7 @@ module.exports = {
         {
             use: 'gridsome-plugin-recommender',
             options: {
-                enabled: false,
+                enabled: true,
                 debug: true,
                 typeName: 'BlogPost',
                 field: 'title',

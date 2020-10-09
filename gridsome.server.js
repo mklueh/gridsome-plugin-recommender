@@ -148,7 +148,7 @@ class RecommenderPlugin {
      * @param collection
      */
     train(collection) {
-        let convertedDocuments = collection.data().map(this.convertNodeToDocument.bind(this));
+        let convertedDocuments = collection.data().map(node => this.convertNodeToDocument(node, this.options.field));
         this.log("training " + convertedDocuments.length);
         this.recommender.train(convertedDocuments);
     }
@@ -171,6 +171,7 @@ class RecommenderPlugin {
      * TODO To be used with multiple fields, it might be enough to concatenate them to one string
      *
      * @param node
+     * @param field
      * @returns {{id: *, content: *}}
      */
     convertNodeToDocument(node, field) {
