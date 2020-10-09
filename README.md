@@ -18,7 +18,7 @@ Analyses your posts and creates relations between similar posts based on text an
  
 ### Examples [on my site](https://www.overflowed.dev) and in the [demo](https://mklueh.github.io/gridsome-plugin-recommender/)
 
-![Showcase(https://raw.githubusercontent.com/mklueh/gridsome-plugin-recommender/gridsome-plugin-recommender-3/images/gridsome_recommender_showcase.png?raw=true)]
+![Showcase](https://raw.githubusercontent.com/mklueh/gridsome-plugin-recommender/gridsome-plugin-recommender-3/images/gridsome_recommender_showcase.png?raw=true)
 
 ## Restrictions
 
