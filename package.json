@@ -1,6 +1,6 @@
 {
   "name": "gridsome-plugin-recommender",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Improve user´s average time on page of your Gridsome site by generating post or product recommendations to show users related content, ads or products they might be interested in on your static site.",
   "main": "gridsome.server.js",
   "author": "Marian Klühspies",
