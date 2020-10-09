@@ -1,7 +1,7 @@
 {
   "name": "gridsome-plugin-recommender",
   "version": "1.1.0",
-  "description": "Improve user´s average time on page of your Gridsome site by generating post or product recommendations to show users related content they might be interested in.",
+  "description": "Improve user´s average time on page of your Gridsome site by generating post or product recommendations to show users related content, ads or products they might be interested in on your static site.",
   "main": "gridsome.server.js",
   "author": "Marian Klühspies",
   "scripts": {
@@ -13,7 +13,7 @@
   "repository": {
     "url": "https://github.com/mklueh/gridsome-plugin-recommender"
   },
-  "homepage": "https://www.overflowed.dev",
+  "homepage": "https://overflowed.dev/projects/gridsome-plugin-recommender",
   "bugs": {
     "url": "https://github.com/mklueh/gridsome-plugin-recommender"
   },
@@ -27,7 +27,12 @@
     "similar posts",
     "similar products",
     "post recommendations",
-    "product recommendations"
+    "product recommendations",
+    "affiliate",
+    "advertising",
+    "tagging",
+    "machine learning",
+    "automation"
   ],
   "peerDependencies": {
     "gridsome": "^0.7.0"

@@ -2,10 +2,11 @@
 
 [![npm](https://img.shields.io/npm/v/gridsome-plugin-recommender.svg)](https://www.npmjs.com/package/gridsome-plugin-recommender)
 
-Improve user´s average time on page of your [Gridsome](https://gridsome.org/) site by generating post or product recommendations to show users
-related content they might be interested in.
+Use machine learning to find relations in your content.
 
- 
+Improve user´s average time on page of your [Gridsome](https://gridsome.org/) site by generating post recommendations with related content users might be interested in.
+
+
 ## 
 Analyses your posts and creates relations between similar posts based on text analysis. For more information on the text analysis part visit [content-based-recommender](https://github.com/stanleyfok/content-based-recommender)
  
@@ -33,7 +34,7 @@ Sources like gridsome-source-filesystem or @gridsome/vue-remark are working**
 
 ## Getting Started
 
-Example: Find similar blog posts based on the title.
+Example: Find similar blog posts based on the title. You can find a more complex example on GitHub under /example
 
 ```js
 module.exports = {
@@ -50,8 +51,12 @@ module.exports = {
       options: {
         enabled: true,
         typeName: 'Post',
+        referenceTypeName: 'Tag',
         field: 'title',
+        referenceField: 'title',
         relatedFieldName: 'related',
+        referenceRelatedFieldName: 'related',
+        caseSensitive: false,
         minScore: 0.01,
         maxScore: 1,
         minRelations:3,
@@ -110,22 +115,41 @@ Enables log messages
 
 - Type: `string` _required_
 
-The collection we want to use to create relations of similar nodes.
+The default collection we want to use to create relations of similar nodes or reference nodes.
+
+#### referenceTypeName
+
+- Type: `string` _required_
+
+The reference collection we want to use to create relations of default collection nodes.
 
 #### field
 
 - Type: `[string]` _required_
 
-The collection fields we want to analyze for similarities
+The collection field we want to analyze for similarities
 
+#### referenceField
+
+- Type: `[string]` _required_
+
+The reference collection field we want to analyze for similarities
 
 #### relatedFieldName
 
 - Type: `[string]`
 - Default: related
 
-The field attached to your GraphQl node containing the related objects.
-Allows creating multiple relations per collection
+The field attached to your GraphQl node of the default collection containing the related objects.
+Allows creating multiple relations per collection.
+
+#### referenceRelatedFieldName
+
+- Type: `[string]`
+- Default: related
+
+The field attached to your GraphQl node of the reference collection containing the related objects.
+Allows creating multiple relations per collection.
 
 #### minScore
 
@@ -159,6 +183,12 @@ it will be filled with random items when fillWithRandom is enabled
 
 Maximum relations to be produced
 
+#### caseSensitive
+
+- Type: `boolean`
+- Default: false
+
+Enables case-sensitive matching
 
 #### fillWithRandom
 
