@@ -60,5 +60,20 @@ module.exports = {
     templates: {
         BlogPost: '/blog/:slug',
         Tag: '/tag/:title'
-    }
+    },
+    chainWebpack: config => {
+        config.module
+            .rule('css')
+            .oneOf('normal')
+            .use('postcss-loader')
+            .tap(options => {
+                options.plugins.unshift(...[
+                    require('postcss-import'),
+                    require('postcss-nested'),
+                    require('tailwindcss'),
+                ])
+
+                return options
+            })
+    },
 }

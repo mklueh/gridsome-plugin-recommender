@@ -3,24 +3,34 @@
     <h1>gridsome-plugin-recommender example</h1>
 
     <p>
-      This Example shows a simple implementation of the <a href="https://github.com/mklueh/gridsome-plugin-recommender">gridsome-plugin-recommender</a> plugin.
+      This Example shows a simple implementation of the <a href="https://github.com/mklueh/gridsome-plugin-recommender">gridsome-plugin-recommender</a>
+      plugin.
       Click on the links below and see the generated related posts.
     </p>
 
-    <div>
-      <ul>
-        <li v-for="post in $page.posts.edges">
-          <g-link :to="post.node.path">{{ post.node.title }}</g-link>
-        </li>
-      </ul>
-    </div>
+    <posts-widget :posts="this.posts"/>
+
   </Layout>
 </template>
 
 <script>
+import PostsWidget from "../components/PostsWidget";
+
 export default {
+  components: {PostsWidget},
   metaInfo: {
     title: 'Hello, world!'
+  },
+  computed: {
+    posts: function () {
+      return this.$page.posts.edges.map(post => {
+        return {
+          id: post.node.id,
+          title: post.node.title,
+          path: post.node.path
+        }
+      });
+    }
   }
 }
 </script>
