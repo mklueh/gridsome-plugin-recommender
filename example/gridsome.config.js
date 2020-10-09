@@ -58,6 +58,7 @@ module.exports = {
         },
     ],
     templates: {
-        BlogPost: '/blog/:slug'
+        BlogPost: '/blog/:slug',
+        Tag: '/tag/:title'
     }
 }

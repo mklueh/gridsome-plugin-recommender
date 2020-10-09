@@ -248,7 +248,13 @@ class RecommenderPlugin {
      */
     createNodeRelations(collection, store, node, documentRelations) {
         let options = {...node};
-        options[this.options.relatedFieldName] = documentRelations.map(relation => store.createReference(this.options.typeName, relation.id));
+        options[this.options.relatedFieldName] = documentRelations.map(relation => {
+            /*
+             *Decide if we reference A-A or A-B
+             */
+            const field = this.options.referenceTypeName || this.options.typeName;
+            return store.createReference(field, relation.id)
+        });
         collection.updateNode(options)
     }
 

@@ -1,4 +1,4 @@
 ---
-title: Entirely unrelated post
+title: Entirely unrelated post about Java
 slug: unrelated-post
 ---
