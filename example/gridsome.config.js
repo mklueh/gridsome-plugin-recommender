@@ -24,18 +24,56 @@ module.exports = {
             }
         },
         {
+            use: '@gridsome/source-filesystem',
+            options: {
+                typeName: 'Tag',
+                path: './content/tags/**/*.md',
+            }
+        },
+        {
             use: 'gridsome-plugin-recommender',
             options: {
                 enabled: true,
                 debug: true,
                 typeName: 'BlogPost',
                 field: 'title',
+                relatedFieldName: 'related',
+                minScore: 0.1,
+                maxRelations: 3,
+            }
+        },
+        {
+            use: 'gridsome-plugin-recommender',
+            options: {
+                enabled: true,
+                debug: true,
+                typeName: 'BlogPost',
+                field: 'title',
+                referenceTypeName: 'Tag',
+                referenceField: 'title',
+                relatedFieldName: 'tags',
                 minScore: 0.1,
                 maxRelations: 3,
             }
         },
     ],
     templates: {
-        BlogPost: '/blog/:slug'
-    }
+        BlogPost: '/blog/:slug',
+        Tag: '/tag/:title'
+    },
+    chainWebpack: config => {
+        config.module
+            .rule('css')
+            .oneOf('normal')
+            .use('postcss-loader')
+            .tap(options => {
+                options.plugins.unshift(...[
+                    require('postcss-import'),
+                    require('postcss-nested'),
+                    require('tailwindcss'),
+                ])
+
+                return options
+            })
+    },
 }

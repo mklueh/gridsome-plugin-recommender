@@ -1,5 +1,5 @@
 ---
-title: This is another post about Gridsome and the Gridsome Recommender Plugin
-slug: gridsome-recommender-plugin-two
+title: This is a post about the Overflowed.dev Blog built with Javascript, Vue and Netlify
+slug: post-about-overflowed-dev-blog
 ---
 
