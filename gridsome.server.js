@@ -51,6 +51,8 @@ class RecommenderPlugin {
              * containing all related elements
              */
             relatedFieldName: 'related',
+
+            referenceRelatedFieldName: 'related',
             /**
              * {minScore} is the minimum similarity score
              * required for being considered "similar"
@@ -125,22 +127,26 @@ class RecommenderPlugin {
             const referenceCollection = actions.getCollection(this.options.referenceTypeName);
             if (!collection) throw `${pluginName}: options.typeName '${this.options.typeName}' cannot be found - make sure the collection exists`;
             this.trainBidirectional(collection, referenceCollection);
+            this.createCollectionRelations(collection, context, actions, false);
+            this.createCollectionRelations(referenceCollection, context, actions, true);
         } else {
             this.train(collection);
+            this.createCollectionRelations(collection, context, actions, false);
         }
 
+        this.log("finished")
+    }
+
+    createCollectionRelations(collection, context, actions,reversed) {
         collection.data().forEach((node) => {
-            console.log(node.id);
             let relations = this.fetchDocumentRelations.call(context, node.id);
             if (this.options.fillWithRandom && relations.length < this.options.minRelations) {
                 this.log(`minRelations ${this.options.minRelations} not reached - filling with ${relations.length} random relations`)
                 relations = this.fillWithRandomRelations(collection, relations, node.id);
                 console.log(node.id, " has ", relations)
             }
-            this.createNodeRelations(collection, actions.store, node, relations);
+            this.createNodeRelations(collection, actions.store, node, relations,reversed);
         })
-
-        this.log("finished")
     }
 
     /**
@@ -259,15 +265,17 @@ class RecommenderPlugin {
      * @param node
      * @param documentRelations
      */
-    createNodeRelations(collection, store, node, documentRelations) {
+    createNodeRelations(collection, store, node, documentRelations, reverse) {
         let options = {...node};
-        options[this.options.relatedFieldName] = documentRelations.map(relation => {
-            /*
-             *Decide if we reference A-A or A-B
-             */
-            const field = this.options.referenceTypeName || this.options.typeName;
-            return store.createReference(field, relation.id)
-        });
+        options[!reverse ? this.options.relatedFieldName : this.options.referenceRelatedFieldName] = documentRelations
+            .map(relation => {
+                /*
+                 *Decide if we reference A-A or A-B
+                 */
+                const field = !reverse && this.options.referenceTypeName || this.options.typeName;
+
+                return store.createReference(field, relation.id)
+            });
         collection.updateNode(options)
     }
 
