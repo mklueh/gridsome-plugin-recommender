@@ -1,30 +1,24 @@
 <template>
   <layout>
-    <g-link to="/">Back</g-link>
-    <div style="padding-bottom: 20px;">
-      <b>Post:</b> {{ $page.blogPost.title }}
+    <div>
+      <g-link class="border-gray-600 border-2 p-2 my-2" to="/">Back</g-link>
+    </div>
+    <h1 class="py-4 underline text-2xl text-center">
+      {{ $page.blogPost.title }}
+    </h1>
+
+    <div id="tags" class="py-6">
+      <b>Automatically matched tags by gridsome-plugin-recommender:</b>
+      <div class="grid grid-cols-3 p-4">
+      <g-link :to="tag.path" class="tag" v-for="tag in $page.blogPost.tags" :key="tag.id">
+        {{            tag.title          }}
+      </g-link>
+      </div>
     </div>
 
-    <div id="tags">
-      <b>Automatically matched tags:</b>
-      <span class="tag" v-for="tag in $page.blogPost.tags" :key="tag.id">
-        <g-link style="color: azure;font-size: large;font-weight: bold;text-decoration: none" :to="tag.path">{{
-            tag.title
-          }}
-        </g-link>
-      </span>
-    </div>
-
-    <div id="related-posts" style="padding-top: 20px" v-if="$page.blogPost.related.length > 0">
-      <b>Related Posts:</b>
-      <ul>
-        <li v-for="related in $page.blogPost.related" :key="related.id">
-          <g-link :to="related.path">{{
-              related.title
-            }}
-          </g-link>
-        </li>
-      </ul>
+    <div id="related-posts" class="py-6" v-if="$page.blogPost.related.length > 0">
+      <b>Automatically matched related posts by gridsome-plugin-recommender:</b>
+      <posts-widget :posts="$page.blogPost.related"/>
     </div>
     <span v-else style="color: red;">This post has no similar posts</span>
 
@@ -32,8 +26,10 @@
 </template>
 
 <script>
+import PostsWidget from "../components/PostsWidget";
 export default {
-  name: "BlogPost"
+  name: "BlogPost",
+  components: {PostsWidget}
 }
 </script>
 

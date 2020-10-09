@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <ul class="list-none bg-gray-800">
-      <li class="shadow" v-for="post in posts">
-        <g-link :to="post.path">{{ post.title }}</g-link>
-      </li>
-    </ul>
+  <div class="max-w-screen-md mx-auto list-none grid grid-cols-3 p-4">
+    <g-link :to="post.path" class="shadow-lg bg-gray-600 text-white p-6 m-2" v-for="post in posts">
+      {{ post.title }}
+    </g-link>
   </div>
 </template>
 

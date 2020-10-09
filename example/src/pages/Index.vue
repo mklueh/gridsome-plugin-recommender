@@ -1,12 +1,22 @@
 <template>
   <Layout>
-    <h1>gridsome-plugin-recommender example</h1>
+    <h1 class="py-4 underline text-2xl text-center">
+      Showcase for the Gridsome Recommender Plugin
+    </h1>
 
     <p>
-      This Example shows a simple implementation of the <a href="https://github.com/mklueh/gridsome-plugin-recommender">gridsome-plugin-recommender</a>
+      This Demo shows a simple implementation of the <a href="https://github.com/mklueh/gridsome-plugin-recommender">gridsome-plugin-recommender</a>
       plugin.
-      Click on the links below and see the generated related posts.
     </p>
+
+    <div class="py-2">
+      It is used for two cases on this website:
+
+      <ul class="list-disc p-4 font-bold">
+        <li>Finding related posts</li>
+        <li>Finding related tags</li>
+      </ul>
+    </div>
 
     <posts-widget :posts="this.posts"/>
 
