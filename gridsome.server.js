@@ -137,15 +137,15 @@ class RecommenderPlugin {
         this.log("finished")
     }
 
-    createCollectionRelations(collection, context, actions,reversed) {
+    createCollectionRelations(collection, context, actions, reversed) {
         collection.data().forEach((node) => {
             let relations = this.fetchDocumentRelations.call(context, node.id);
             if (this.options.fillWithRandom && relations.length < this.options.minRelations) {
                 this.log(`minRelations ${this.options.minRelations} not reached - filling with ${relations.length} random relations`)
                 relations = this.fillWithRandomRelations(collection, relations, node.id);
-                console.log(node.id, " has ", relations)
+                this.log(node.id, " has ", relations)
             }
-            this.createNodeRelations(collection, actions.store, node, relations,reversed);
+            this.createNodeRelations(collection, actions.store, node, relations, reversed);
         })
     }
 
@@ -207,6 +207,7 @@ class RecommenderPlugin {
      * @returns {[{id:1,score:1}]}
      */
     fetchDocumentRelations(id) {
+        this.log("Fetching relations for document " + id)
         return this.recommender.getSimilarDocuments(id, 0, this.options.maxRelations);
     }
 
@@ -220,10 +221,11 @@ class RecommenderPlugin {
      */
     fillWithRandomRelations(collection, documentRelations, excludedDocumentId) {
         const numElementsMissing = this.options.minRelations - documentRelations.length;
-        this.log(`Missing ${numElementsMissing} relations to minRelations of ${this.options.minRelations}`)
 
         const fillers = this.getArraySubsetExcluding(collection, documentRelations, numElementsMissing, excludedDocumentId)
             .map(f => this.convertNodeToDocument(f));
+
+        this.log(`Missing ${numElementsMissing} relations to minRelations of ${this.options.minRelations} enriched with ${fillers.length} random documents`)
 
         return documentRelations.concat(fillers)
     }
