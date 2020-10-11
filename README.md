@@ -17,7 +17,10 @@ Analyses your posts and creates relations between similar posts based on text an
 1. Showing context-based ads / affiliate links on your post pages that relate to the content
 1. Automatically generating tag / category indexes for your posts or products 
  
-### Examples [on my site](https://www.overflowed.dev) and in the [demo](https://mklueh.github.io/gridsome-plugin-recommender/)
+## Examples
+
+### See Post-Recommendations and Contextual-Ads in action [on my site](https://www.overflowed.dev)
+### See Post-Recommendations and Auto-Tagging in action [on the demo site](https://mklueh.github.io/gridsome-plugin-recommender/) with [source code](https://github.com/mklueh/gridsome-plugin-recommender/tree/master/example)
 
 ![Showcase](images/gridsome_recommender_showcase.png)
 
