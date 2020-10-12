@@ -12,8 +12,8 @@ Analyses your posts and creates relations between similar posts based on text an
  
 ## Common Use Cases
 
-1. Finding related posts
-1. Save time by automatically tagging / categorizing your posts
+1. Find related posts and show post recommendations
+1. Save time by automatically tagging / categorizing your posts with related tags
 1. Showing context-based ads / affiliate links on your post pages that relate to the content
 1. Automatically generating tag / category indexes for your posts or products 
  
