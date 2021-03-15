@@ -22,6 +22,5 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: "Publish NPM package"
         run: npm publish
-        if: github.ref == 'refs/heads/master'
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
