@@ -12,8 +12,8 @@ Analyses your posts and creates relations between similar posts based on text an
  
 ## Common Use Cases
 
-1. Finding related posts
-1. Save time by automatically tagging / categorizing your posts
+1. Find related posts and show post recommendations
+1. Save time by automatically tagging / categorizing your posts with related tags
 1. Showing context-based ads / affiliate links on your post pages that relate to the content
 1. Automatically generating tag / category indexes for your posts or products 
  
@@ -27,7 +27,7 @@ Analyses your posts and creates relations between similar posts based on text an
 ## Restrictions
 
 **This plugin does not operate on the GraphQL Layer. Any content source that plugs in via GraphQL should not work with it.
-Sources like gridsome-source-filesystem or @gridsome/vue-remark are working**
+Tested with gridsome-source-filesystem**
 
 
 ## Install
