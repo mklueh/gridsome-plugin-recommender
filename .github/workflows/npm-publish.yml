@@ -1,11 +1,6 @@
 on:
   workflow_dispatch:
   push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
 
 name: Build & Deploy gridsome-plugin-recommender
 
