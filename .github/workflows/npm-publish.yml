@@ -1,4 +1,5 @@
-on: push
+on: pull_request
+name: Build & Deploy gridsome-plugin-recommender
 
 jobs:
   publish-npm:
