@@ -1,4 +1,12 @@
-on: push
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+name: Build & Deploy gridsome-plugin-recommender
 
 jobs:
   publish:
@@ -13,3 +21,4 @@ jobs:
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
+
