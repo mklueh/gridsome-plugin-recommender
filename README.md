@@ -26,8 +26,9 @@ Analyses your posts and creates relations between similar posts based on text an
 
 ## Restrictions
 
-**This plugin does not operate on the GraphQL Layer. Any content source that plugs in via GraphQL should not work with it.
-Tested with gridsome-source-filesystem**
+**This plugin does not operate on the GraphQL Layer. Any content source that plugs in via GraphQL should not work with it. 
+It only works with source plugins that operate on the [Gridsome Data Store API](https://gridsome.org/docs/data-store-api/).
+Tested with [gridsome-source-filesystem](https://gridsome.org/plugins/@gridsome/source-filesystem)**
 
 
 ## Install

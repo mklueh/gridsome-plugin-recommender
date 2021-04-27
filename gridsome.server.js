@@ -52,6 +52,10 @@ class RecommenderPlugin {
              */
             relatedFieldName: 'related',
 
+            /**
+             * relation field name that gets added to the reference collection
+             * containing all related elements. Only used if referenceCollection is set
+             */
             referenceRelatedFieldName: 'related',
             /**
              * {minScore} is the minimum similarity score
