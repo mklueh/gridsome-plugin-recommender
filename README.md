@@ -4,18 +4,19 @@
 
 Use machine learning to find relations in your content.
 
-Improve user´s average time on page of your [Gridsome](https://gridsome.org/) site by generating post recommendations with related content users might be interested in.
+Improve user´s average time on page of your [Gridsome](https://gridsome.org/) site by generating recommendations with related content users might be interested in, such as similar posts or related products.
 
 
 ## 
-Analyses your posts and creates relations between similar posts based on text analysis. For more information on the text analysis part visit [content-based-recommender](https://github.com/stanleyfok/content-based-recommender)
+Analyses your posts and creates relations between similar data nodes based on text analysis. For more information on the text analysis part visit [content-based-recommender](https://github.com/stanleyfok/content-based-recommender)
  
 ## Common Use Cases
 
-1. Find related posts and show post recommendations
-1. Save time by automatically tagging / categorizing your posts with related tags
-1. Showing context-based ads / affiliate links on your post pages that relate to the content
-1. Automatically generating tag / category indexes for your posts or products 
+1. Find related posts and recommend similar posts to users
+2. Show related products the user might also be interested in in your shop
+3. Save time by automatically tagging / categorizing your posts with related tags
+4. Showing context-based ads / affiliate links on your post pages that relate to the content
+5. Automatically generating tag / category indexes for your posts or products 
  
 ## Examples
 
@@ -23,6 +24,7 @@ Analyses your posts and creates relations between similar posts based on text an
 ### See Post-Recommendations and Auto-Tagging in action [on the demo site](https://mklueh.github.io/gridsome-plugin-recommender/) with [source code](https://github.com/mklueh/gridsome-plugin-recommender/tree/master/example)
 
 ![Showcase](images/gridsome_recommender_showcase.png)
+
 
 ## Restrictions
 
