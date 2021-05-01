@@ -1,4 +1,10 @@
-on: push
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'master'
+
+name: Build & Deploy gridsome-plugin-recommender
 
 jobs:
   publish-npm:
