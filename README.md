@@ -7,8 +7,8 @@ Use machine learning to create relations in your content.
 Improve user´s average time on page of your [Gridsome](https://gridsome.org/) site by generating recommendations with related content users might be interested in, such as similar posts or related products.
 
 
-## 
 Analyses your posts / products or whatever entity you have and creates relations between similar data nodes based on text analysis. For more information on the text analysis part visit [content-based-recommender](https://github.com/stanleyfok/content-based-recommender)
+
  
 ## Common Use Cases
 

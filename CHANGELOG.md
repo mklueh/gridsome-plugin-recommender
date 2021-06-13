@@ -1,5 +1,6 @@
 # Changelog
 
+
 ### v1.1.0 (09.10.2020)
 
 * Support for multiple collections using **options.referenceTypeName**
