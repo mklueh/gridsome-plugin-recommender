@@ -282,6 +282,12 @@ class RecommenderPlugin {
 
                 return store.createReference(field, relation.id)
             });
+        
+        // Fix incompatibility with vue-remark
+        if (options.internal.content == null && options.content) {
+          options.internal.content = options.content;
+        }
+
         collection.updateNode(options)
     }
 
