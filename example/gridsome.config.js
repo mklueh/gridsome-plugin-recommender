@@ -4,8 +4,6 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
-const gridsomePluginRecommender = require('..');
-
 module.exports = {
     siteName: 'Gridsome Plugin Recommender Demo',
     siteUrl: 'https://mklueh.github.io',
@@ -33,7 +31,7 @@ module.exports = {
             }
         },
         {
-            use: gridsomePluginRecommender,
+            use: 'gridsome-plugin-recommender',
             options: {
                 enabled: true,
                 debug: true,
@@ -45,7 +43,7 @@ module.exports = {
             }
         },
         {
-            use: gridsomePluginRecommender,
+            use: 'gridsome-plugin-recommender',
             options: {
                 enabled: true,
                 debug: true,
